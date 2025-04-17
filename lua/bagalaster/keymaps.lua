@@ -49,7 +49,7 @@ vim.keymap.set('n', '<M-k>', '<cmd>cprev<CR>')
 
 -- autocommands
 local augroup = vim.api.nvim_create_augroup
-local mbagwell_group = augroup('mbagwell', {})
+local bagalaster_group = augroup('bagalaster', {})
 
 local autocmd = vim.api.nvim_create_autocmd
 local yank_group = augroup('HighlightYank', {})
@@ -65,7 +65,7 @@ autocmd('TextYankPost', {
 })
 
 autocmd('LspAttach', {
-    group = mbagwell_group,
+    group = bagalaster_group,
     callback = function(event)
 	local opts = { buffer = event.buf }
 	vim.keymap.set('n', 'gd', function() vim.lsp.buf.definition() end, opts)

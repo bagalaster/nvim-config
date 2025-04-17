@@ -31,10 +31,10 @@ nvim .
 ## Directory Structure
 
 ```
-|- init.lua  sourced on launch, invokes the mbagwell module
+|- init.lua  sourced on launch, invokes the bagalaster module
 |- lua
-    |- mbagwell  this is where all the non-plugin config goes
-        |- init.lua        sourced when mbagwell is required
+    |- bagalaster  this is where all the non-plugin config goes
+        |- init.lua        sourced when bagalaster is required
         |- keymaps.lua     contains the custom keybindings and options I like
         |- lazy.lua        lazy plugin manager - this is where plugins are initialized
     |- plugins  this is where all the plugin config goes
