@@ -18,7 +18,7 @@ brew install ripgrep
 
 3. Clone the folder into your config folder.
 ```bash
-git clone -- https://github.com/bagalaster/nvim-config.git ${XDG_CONFIG_HOME:-${HOME}/.config/nvim-this-is-a-test}
+git clone -- https://github.com/bagalaster/nvim-config.git ${XDG_CONFIG_HOME:-${HOME}/.config/nvim}
 ```
 
 4. Launch neovim
