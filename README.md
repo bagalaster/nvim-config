@@ -41,6 +41,7 @@ nvim .
         |- colors.lua      catppuccin colorscheme
         |- lazydev.lua     better devex for configuring nvim
         |- lsp.lua         all the lsp configuration goes here
+        |- lualine.lua     configures a nicer statusline
         |- telescope.lua   fuzzy-finding of all kinds, I mostly use for files/grep
         |- treesitter.lua  for syntax highlighting
 ```
