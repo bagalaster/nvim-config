@@ -3,19 +3,27 @@
 local lang_servers = {
     "lua_ls",
     "pyright",
+    -- "sqls",
 }
 
 return {
-    "neovim/nvim-lspconfig",
+    "mason-org/mason-lspconfig.nvim",
+    opts = { ensure_installed = lang_servers },
     dependencies = {
-	"williamboman/mason.nvim",
-	"williamboman/mason-lspconfig.nvim",
+	{ "mason-org/mason.nvim", opts = {} },
+	"neovim/nvim-lspconfig",
 	"hrsh7th/nvim-cmp",
 	"hrsh7th/cmp-nvim-lsp",
         "L3MON4D3/LuaSnip",
         "saadparwaiz1/cmp_luasnip",
+	"nanotee/sqls.nvim",
     },
     config = function()
+	require('mason').setup()
+	require('mason-lspconfig').setup {
+	    ensure_installed = lang_servers,
+	    automatic_enable = false,
+	}
 	local cmp = require('cmp')
 	local cmp_lsp = require('cmp_nvim_lsp')
 	local capabilities = vim.tbl_deep_extend(
@@ -25,18 +33,19 @@ return {
 	    cmp_lsp.default_capabilities()
 	)
 
-	require('mason').setup()
-	require('mason-lspconfig').setup {
-	    ensure_installed = lang_servers,
-	    automatic_installation = true,
-	    handlers = {
-		function(server_name)
-		    require('lspconfig')[server_name].setup {
-			capabilities = capabilities
-		    }
-		end
-	    }
-	}
+	for _, server_name in pairs(lang_servers) do
+	    vim.lsp.config(server_name, { capabilities = capabilities })
+	    vim.lsp.enable(server_name)
+	end
+
+	vim.lsp.config('sqlmesh', {
+	    capabilities = capabilities,
+	    cmd = { '/Users/macbagwell/sqlmeshlsp/dist/sqlmeshlsp' },
+	    filetypes = { 'sql' },
+	    root_markers = { 'config.yaml', 'config.py' },
+
+	})
+	vim.lsp.enable('sqlmesh')
 
 	local cmp_select = { behavior = cmp.SelectBehavior.Select }
 
@@ -62,8 +71,8 @@ return {
 
 	vim.diagnostic.config({
 	    update_in_insert = true,
-	    virtual_lines = true,
-	    signs = false,
+	    virtual_text = true,
+	    signs = true,
 	})
     end,
 }

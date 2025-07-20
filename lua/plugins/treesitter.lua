@@ -8,6 +8,7 @@ return {
 	    ensure_installed = { "lua", "luadoc", "sql", "python", "markdown", "markdown_inline" },
 	    sync_install = false,
 	    highlight = { enable = true },
+	    auto_install = true,
 	})
     end
 }

@@ -47,6 +47,12 @@ vim.keymap.set('v', 'p', '"_dP')
 vim.keymap.set('n', '<M-j>', '<cmd>cnext<CR>')
 vim.keymap.set('n', '<M-k>', '<cmd>cprev<CR>')
 
+-- Floating Terminal
+vim.keymap.set('n', '<leader>tt', '<cmd>FloatTerm<CR>')
+
+-- Use esc to exit terminal mode like a normal person
+vim.keymap.set('t', '<Esc>', '<C-\\><C-n>')
+
 -- autocommands
 local augroup = vim.api.nvim_create_augroup
 local bagalaster_group = augroup('bagalaster', {})
@@ -78,5 +84,7 @@ autocmd('LspAttach', {
         vim.keymap.set("i", "<C-h>", function() vim.lsp.buf.signature_help() end, opts)
         vim.keymap.set("n", "[d", function() vim.diagnostic.jump({count=1, float=true}) end, opts)
         vim.keymap.set("n", "]d", function() vim.diagnostic.jump({count=1, float=true}) end, opts)
+
+	vim.lsp.set_log_level('debug')
     end
 })
